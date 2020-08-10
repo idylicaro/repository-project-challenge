@@ -31,6 +31,9 @@ app.put("/repositories/:id", (request, response) => {
   const { id } = request.params
   const { url, title, techs } = request.body
   const index = repositories.findIndex( repo => repo.id === id)
+  if (index < 0){
+    return response.sendStatus(400)
+  }
   const likes = repositories[index].likes
   repositories.splice(index,1)
   repositories.push({
