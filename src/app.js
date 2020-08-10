@@ -55,6 +55,9 @@ app.put("/repositories/:id", (request, response) => {
 app.delete("/repositories/:id", (request, response) => {
   const { id } = request.params
   const index = repositories.findIndex( repo => repo.id === id)
+  if(index < 0){
+    return response.sendStatus(400)
+  }
   repositories.splice(index)
   return response.sendStatus(204)
 });
