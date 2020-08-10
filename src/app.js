@@ -28,7 +28,24 @@ app.post("/repositories", (request, response) => {
 });
 
 app.put("/repositories/:id", (request, response) => {
-  // TODO
+  const { id } = request.params
+  const { url, title, techs } = request.body
+  const index = repositories.findIndex( repo => repo.id === id)
+  const likes = repositories[index].likes
+  repositories.splice(index,1)
+  repositories.push({
+    id,
+    url,
+    title,
+    techs,
+    likes
+  })
+  return response.send({
+    id,
+    url,
+    title,
+    techs
+  })
 });
 
 app.delete("/repositories/:id", (request, response) => {
