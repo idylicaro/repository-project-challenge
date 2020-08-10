@@ -47,12 +47,16 @@ app.put("/repositories/:id", (request, response) => {
     id,
     url,
     title,
-    techs
+    techs,
+    likes
   })
 });
 
 app.delete("/repositories/:id", (request, response) => {
-  // TODO
+  const { id } = request.params
+  const index = repositories.findIndex( repo => repo.id === id)
+  repositories.splice(index)
+  return response.sendStatus(204)
 });
 
 app.post("/repositories/:id/like", (request, response) => {
